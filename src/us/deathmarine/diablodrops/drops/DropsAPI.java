@@ -106,6 +106,7 @@ public class DropsAPI {
 		return dur;
 	}
 
+    // this method determined what item will be dropped
 	/**
 	 * Returns a Material that was randomly picked
 	 * 
@@ -129,7 +130,7 @@ public class DropsAPI {
 		case 7:
 			return plugin.getItemAPI().getAxe();
 		case 8:
-			return plugin.getItemAPI().getSpade();
+			return plugin.getItemAPI().getSpade();      // shovel
 		case 9:
 			return Material.BOW;
 		default:
@@ -335,7 +336,7 @@ public class DropsAPI {
 		if (plugin.getSingleRandom().nextBoolean()
 				&& plugin.getConfig().getBoolean("IdentifyTome.Enabled", true)
 				&& (plugin.getSingleRandom().nextInt(10000) <= plugin
-						.getSettings().getTomeChance()))
+						.getSettings().getTomeChance()))        // 200/10000 = 2%
 			return new IdentifyTome();
 		/*
 		 * if (plugin.getSingleRandom().nextBoolean() &&
@@ -353,7 +354,7 @@ public class DropsAPI {
 		if (plugin.getSingleRandom().nextBoolean()
 				&& plugin.getConfig().getBoolean("Custom.Enabled", true)
 				&& (plugin.getSingleRandom().nextInt(10000) <= plugin
-						.getSettings().getCustomChance())
+						.getSettings().getCustomChance())       // 100/10000 = 1%
 				&& plugin.custom.size() > 0)
 			return plugin.custom.get(plugin.getSingleRandom().nextInt(
 					plugin.custom.size()));
@@ -834,7 +835,7 @@ public class DropsAPI {
 	 * @return Tier of item
 	 */
 	public Tier getTier(ItemStack item) {
-		if (!item.hasItemMeta() || !item.getItemMeta().hasLore())
+		if (!item.hasItemMeta() || !item.getItemMeta().hasLore())   //TODO: check what getLore() do, and what the lore is
 			return null;
 		for (String s : item.getItemMeta().getLore()) {
 			Tier tier = getTier(s);
@@ -844,6 +845,7 @@ public class DropsAPI {
 		return null;
 	}
 
+    //TODO: check carefully to see if there is any errors
 	/**
 	 * Gets tier from name
 	 * 

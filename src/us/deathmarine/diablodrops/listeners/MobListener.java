@@ -42,18 +42,20 @@ public class MobListener implements Listener {
 				&& (event.getSpawnReason().equals(SpawnReason.EGG) || event
 						.getSpawnReason().equals(SpawnReason.SPAWNER_EGG)))
 			return;
+			// Entity spawn rate
 		EntitySpawnEvent ese = new EntitySpawnEvent(entity, plugin
-				.getSingleRandom().nextInt(100) + 1);
+				.getSingleRandom().nextInt(100) + 1);   // [0-99] + 1
 		plugin.getServer().getPluginManager().callEvent(ese);
-		if ((entity instanceof Monster)
+		if ((entity instanceof Monster)     // 3% chance to spawn a mob with items
 				&& (plugin.getConfig().getInt("Percentages.ChancePerSpawn", 3) >= ese
 						.getChance())) {
 			List<ItemStack> items = new ArrayList<ItemStack>();
-			for (int i = 0; i < (plugin.getSingleRandom().nextInt(5) + 1); i++) {
+			for (int i = 0; i < (plugin.getSingleRandom().nextInt(5) + 1); i++) {   // will this method be execute several times?
 				ItemStack ci = plugin.getDropAPI().getItem();
 				while (ci == null) {
 					ci = plugin.getDropAPI().getItem();
 				}
+                // determine if custom items will be dropped, and which one will. CI are defined in custom.yml
 				if (plugin.getConfig().getBoolean("Custom.Only", false)
 						&& plugin.getConfig()
 								.getBoolean("Custom.Enabled", true)) {
@@ -100,6 +102,6 @@ public class MobListener implements Listener {
 					}
 				}
 			}
-		}
+		}   // end of if ((entity instanceof Monster)
 	}
 }
